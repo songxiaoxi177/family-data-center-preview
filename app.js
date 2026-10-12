@@ -1,46 +1,10 @@
 const pages=[...document.querySelectorAll('.page')];const nav=[...document.querySelectorAll('nav button')];
-const devices={
- pc:{icon:'🖥️',type:'Windows PC',name:'主电脑',cpu:'32%',ram:'48%',disk:'61%',traffic:'8.4 GB'},
- phone:{icon:'📱',type:'Android · Wi-Fi',name:'我的手机',cpu:'—',ram:'—',disk:'68%',traffic:'1.8 GB'},
- nas:{icon:'💾',type:'家庭存储服务器',name:'家庭 NAS',cpu:'18%',ram:'39%',disk:'62%',traffic:'4.7 GB'},
- router:{icon:'📡',type:'家庭网络核心设备',name:'家庭网络',cpu:'12%',ram:'—',disk:'—',traffic:'3.7 GB'}
-};
+const devices={pc:{icon:'🖥️',type:'Windows PC',name:'主电脑',cpu:'32%',ram:'48%',disk:'61%',traffic:'8.4 GB'},phone:{icon:'📱',type:'Android · Wi-Fi',name:'我的手机',cpu:'—',ram:'—',disk:'68%',traffic:'1.8 GB'},nas:{icon:'💾',type:'家庭存储服务器',name:'家庭 NAS',cpu:'18%',ram:'39%',disk:'62%',traffic:'4.7 GB'},router:{icon:'📡',type:'家庭网络核心设备',name:'家庭网络',cpu:'12%',ram:'—',disk:'—',traffic:'3.7 GB'}};
 function show(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));location.hash=id;scrollTo(0,0)}
 function openDevice(key){const d=devices[key]||devices.pc;document.querySelector('#detail-icon').textContent=d.icon;document.querySelector('#detail-type').textContent=d.type;document.querySelector('#detail-name').textContent=d.name;document.querySelector('#detail-cpu').textContent=d.cpu;document.querySelector('#detail-ram').textContent=d.ram;document.querySelector('#detail-disk').textContent=d.disk;document.querySelector('#detail-traffic').textContent=d.traffic;document.querySelector('#detail-updated').textContent='刚刚';show('device-detail')}
-nav.forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));
-document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',()=>openDevice(el.dataset.device)));
-document.querySelector('[data-back="devices"]').addEventListener('click',()=>show('devices'));
-const initial=location.hash.replace('#','');if(pages.some(p=>p.id===initial)&&initial!=='device-detail')show(initial);
-function updateTime(){const d=new Date();const el=document.querySelector('#time');if(el)el.textContent=d.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}updateTime();setInterval(updateTime,30000);
-document.querySelector('#notify').onclick=()=>alert('当前没有新的高优先级异常。\n真实设备接入后，这里会显示 CPU、网络、存储等异常提醒。');
-
-// 外观：日间 / 夜间 / 跟随系统
-const themeKey='fdc-theme';
-function systemTheme(){return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
+nav.forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));document.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click',()=>openDevice(el.dataset.device)));document.querySelector('[data-back="devices"]').addEventListener('click',()=>show('devices'));
+const initial=location.hash.replace('#','');if(pages.some(p=>p.id===initial)&&initial!=='device-detail')show(initial);function updateTime(){const d=new Date();const el=document.querySelector('#time');if(el)el.textContent=d.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}updateTime();setInterval(updateTime,30000);document.querySelector('#notify').onclick=()=>alert('当前没有新的高优先级异常。\n真实设备接入后，这里会显示 CPU、网络、存储等异常提醒。');
+const themeKey='fdc-theme';function systemTheme(){return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
 function updateThemeToggle(){const b=document.querySelector('#theme-toggle');if(!b)return;const mode=localStorage.getItem(themeKey)||'system';const actual=mode==='system'?systemTheme():mode;b.textContent=actual==='light'?'🌙':'☀️';b.setAttribute('aria-label',actual==='light'?'切换夜间模式':'切换日间模式');b.title=actual==='light'?'切换夜间模式':'切换日间模式'}
-function applyTheme(mode){
- const actual=mode==='system'?systemTheme():mode;
- document.body.classList.toggle('light-theme',actual==='light');
- document.documentElement.dataset.theme=mode;
- localStorage.setItem(themeKey,mode);
- document.querySelectorAll('[data-theme-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.themeMode===mode));
- updateThemeToggle();
-}
-function setupTheme(){
- const settings=document.querySelector('.settings');
- if(!settings)return;
- const style=document.createElement('style');
- style.textContent='.theme-setting{background:#101722;border:1px solid #1d2838;border-radius:15px;padding:15px;margin:9px 0}.theme-title{font-size:14px}.theme-title span{float:right;color:#7f8ca0;font-size:11px}.theme-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.theme-options button{border:1px solid #263348;background:#0b111b;color:#8e9bae;border-radius:9px;padding:9px 5px;font-size:11px}.theme-options button.selected{color:#61e6a7;border-color:#37634f}.light-theme{background:#f3f5f8;color:#1b2430}.light-theme .top span,.light-theme .sub,.light-theme small,.light-theme .metrics span,.light-theme .stats span,.light-theme .detail-stats span,.light-theme .list span,.light-theme .device-card>small,.light-theme .device-card p,.light-theme .settings span,.light-theme .privacy-note,.light-theme .chart-head span,.light-theme .warning{color:#667386}.light-theme .hero,.light-theme .detail-head{background:linear-gradient(135deg,#ffffff,#e9eef5);border-color:#d5dce5}.light-theme .metrics article,.light-theme .stats article,.light-theme .detail-stats article,.light-theme .list>div,.light-theme .settings>div,.light-theme .theme-setting,.light-theme .device-card,.light-theme .chart,.light-theme .forecast,.light-theme .info-list{background:#fff;border-color:#d7dee7}.light-theme .insight,.light-theme .warning{background:#fff;border-color:#d7dee7}.light-theme .theme-options button{background:#f5f7fa;border-color:#d1d9e3;color:#526176}.light-theme nav{background:rgba(255,255,255,.97);border-color:#d7dee7}.light-theme nav button{color:#68768a}.light-theme nav button.active{color:#15945d}.light-theme .privacy-note{background:#fff}.light-theme .back-btn,.light-theme .device-filter button,.light-theme .period button{background:#fff;border-color:#d1d9e3;color:#617087}';
- document.head.appendChild(style);
- const box=document.createElement('div');
- box.className='theme-setting';
- box.innerHTML='<div class="theme-title">🎨 外观 <span>选择显示模式</span></div><div class="theme-options"><button data-theme-mode="system">📱 跟随系统</button><button data-theme-mode="light">☀️ 日间</button><button data-theme-mode="dark">🌙 夜间</button></div>';
- settings.appendChild(box);
- const saved=localStorage.getItem(themeKey)||'system';
- box.querySelectorAll('[data-theme-mode]').forEach(btn=>btn.addEventListener('click',()=>applyTheme(btn.dataset.themeMode)));
- applyTheme(saved);
- if(window.matchMedia){window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if((localStorage.getItem(themeKey)||'system')==='system')applyTheme('system')})}
-}
-setupTheme();
-const themeToggle=document.querySelector('#theme-toggle');
-if(themeToggle)themeToggle.addEventListener('click',()=>{const mode=localStorage.getItem(themeKey)||'system';const actual=mode==='system'?systemTheme():mode;applyTheme(actual==='light'?'dark':'light');});
+function applyTheme(mode){const actual=mode==='system'?systemTheme():mode;document.body.classList.toggle('light-theme',actual==='light');document.documentElement.dataset.theme=mode;document.querySelector('meta[name="theme-color"]')?.setAttribute('content',actual==='light'?'#ffffff':'#080c14');localStorage.setItem(themeKey,mode);document.querySelectorAll('[data-theme-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.themeMode===mode));updateThemeToggle()}
+function setupTheme(){const settings=document.querySelector('.settings');if(!settings)return;const style=document.createElement('style');style.textContent='.theme-setting{background:#101722;border:1px solid #1d2838;border-radius:15px;padding:15px;margin:9px 0}.theme-title{font-size:14px}.theme-title span{float:right;color:#7f8ca0;font-size:11px}.theme-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.theme-options button{border:1px solid #263348;background:#0b111b;color:#8e9bae;border-radius:9px;padding:9px 5px;font-size:11px}.theme-options button.selected{color:#61e6a7;border-color:#37634f}';document.head.appendChild(style);const box=document.createElement('div');box.className='theme-setting';box.innerHTML='<div class="theme-title">🎨 外观 <span>选择显示模式</span></div><div class="theme-options"><button data-theme-mode="system">📱 跟随系统</button><button data-theme-mode="light">☀️ 日间</button><button data-theme-mode="dark">🌙 夜间</button></div>';settings.appendChild(box);const saved=localStorage.getItem(themeKey)||'system';box.querySelectorAll('[data-theme-mode]').forEach(btn=>btn.addEventListener('click',()=>applyTheme(btn.dataset.themeMode)));applyTheme(saved);if(window.matchMedia)window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if((localStorage.getItem(themeKey)||'system')==='system')applyTheme('system')})}setupTheme();const themeToggle=document.querySelector('#theme-toggle');if(themeToggle)themeToggle.addEventListener('click',()=>{const mode=localStorage.getItem(themeKey)||'system';const actual=mode==='system'?systemTheme():mode;applyTheme(actual==='light'?'dark':'light')});
