@@ -10,16 +10,53 @@
 </head>
 <body>
   <main class="app">
-    <header class="top"><div><b>FAMILY DATA CENTER</b><span>家庭数据中心</span></div><button id="notify">●</button></header>
+    <header class="top"><div><b>FAMILY DATA CENTER</b><span>家庭数据中心 · V0.3 UI Preview</span></div><button id="notify">●</button></header>
+
     <section id="home" class="page active">
-      <div class="hero"><div><small>家庭状态</small><h1>运行良好</h1><p>最后更新：<span id="time">刚刚</span></p></div><strong>98<em>%</em></strong></div>
-      <div class="grid metrics"><article><small>在线设备</small><b>8</b><span>台</span></article><article><small>网络状态</small><b>良好</b></article><article><small>存储使用</small><b>62%</b></article><article><small>今日流量</small><b>18.6</b><span>GB</span></article></div>
-      <h2>设备概览</h2><div class="list"><div>🖥️ <b>主电脑</b><span>CPU 32% · RAM 48%</span><i>在线</i></div><div>💾 <b>家庭 NAS</b><span>存储 62% · 2.4 TB</span><i>在线</i></div><div>📡 <b>家庭网络</b><span>下行 186 Mbps · 上行 42 Mbps</span><i>良好</i></div></div>
-      <h2>智能分析</h2><div class="insight"><b>网络流量正常</b><p>今日流量比过去 7 天平均值低 8%，暂无异常。</p></div><div class="insight"><b>存储增长稳定</b><p>按当前增长速度，预计约 94 天后达到 80% 使用率。</p></div>
+      <div class="hero"><div><small>家庭状态</small><h1>运行良好</h1><p>最后更新：<span id="time">刚刚</span></p><div class="source-pill">演示数据 · 等待真实设备接入</div></div><strong>98<em>%</em></strong></div>
+
+      <div class="grid metrics">
+        <article><small>在线设备</small><b>8</b><span>台</span></article>
+        <article><small>网络状态</small><b>良好</b><span>延迟 8 ms</span></article>
+        <article><small>存储使用</small><b>62%</b><span>2.4 / 3.9 TB</span></article>
+        <article><small>今日流量</small><b>18.6</b><span>GB</span></article>
+      </div>
+
+      <h2>设备概览</h2>
+      <div class="list">
+        <div class="clickable" data-open="devices"><strong>🖥️ 主电脑</strong><span>CPU 32% · RAM 48% · 磁盘 61%</span><i>在线</i></div>
+        <div class="clickable" data-open="devices"><strong>📱 我的手机</strong><span>电量 52% · Wi-Fi · 今日流量 1.8 GB</span><i>在线</i></div>
+        <div class="clickable" data-open="devices"><strong>💾 家庭 NAS</strong><span>存储 62% · 2.4 TB · 健康</span><i>在线</i></div>
+        <div class="clickable" data-open="devices"><strong>📡 家庭网络</strong><span>下行 186 Mbps · 上行 42 Mbps</span><i>良好</i></div>
+      </div>
+
+      <h2>智能分析</h2>
+      <div class="insight"><b>🟢 网络流量正常</b><p>今日流量比过去 7 天平均值低 8%，暂无异常。</p></div>
+      <div class="insight"><b>💾 存储增长稳定</b><p>按当前增长速度，预计约 94 天后达到 80% 使用率。</p></div>
+      <div class="insight warning-insight"><b>💡 设备接入提示</b><p>目前尚未连接真实家庭电脑。电脑上线后，这些演示数据会替换为真实数据。</p></div>
     </section>
-    <section id="devices" class="page"><h1>设备</h1><p class="sub">家庭设备实时状态</p><div class="device-card"><b>🖥️ 主电脑</b><div class="bars"><span>CPU <i style="width:32%"></i></span><span>RAM <i style="width:48%"></i></span><span>磁盘 <i style="width:61%"></i></span></div><small>在线 · Windows PC</small></div><div class="device-card"><b>💻 笔记本电脑</b><p>CPU 18% · RAM 41% · 电量 76%</p><small>在线</small></div><div class="device-card"><b>💾 家庭 NAS</b><p>2.4 TB / 3.9 TB · 磁盘健康</p><small>在线</small></div><div class="device-card"><b>📡 路由器</b><p>8 台设备 · 网络延迟 8 ms</p><small>在线</small></div></section>
-    <section id="analysis" class="page"><h1>分析</h1><p class="sub">过去 24 小时</p><div class="chart"><b>CPU 使用率</b><div class="columns">35 42 31 28 55 47 38 32 44 36 29 41</div></div><div class="chart line"><b>网络流量</b><div class="fake-line">▁▂▃▂▄▆▅▃▂▄▃▂</div></div><div class="grid stats"><article><small>平均 CPU</small><b>37%</b></article><article><small>平均 RAM</small><b>45%</b></article><article><small>今日流量</small><b>18.6 GB</b></article><article><small>在线时长</small><b>16.4 h</b></article></div><div class="warning">⚠️ 暂无高优先级异常</div></section>
-    <section id="settings" class="page"><h1>设置</h1><p class="sub">家庭数据中心配置</p><div class="settings"><div>👤 账户与家庭 <span>›</span></div><div>📱 数据源与设备 <span>›</span></div><div>🔄 同步设置 <span>›</span></div><div>🔔 通知 <span>已开启</span></div><div>🤖 智能分析 <span>已开启</span></div><div>🔒 隐私与安全 <span>›</span></div><div>ℹ️ 关于 <span>V0.2</span></div></div></section>
+
+    <section id="devices" class="page">
+      <h1>设备</h1><p class="sub">家庭设备统一管理</p>
+      <div class="device-filter"><button class="selected">全部 8</button><button>电脑 2</button><button>手机 1</button><button>网络 1</button><button>IoT 4</button></div>
+      <div class="device-card"><div class="device-title"><b>🖥️ 主电脑</b><i>● 在线</i></div><small>Windows PC · 演示数据</small><div class="bars"><span>CPU <b>32%</b><i style="width:32%"></i></span><span>RAM <b>48%</b><i style="width:48%"></i></span><span>磁盘 <b>61%</b><i style="width:61%"></i></span></div><div class="mini-grid"><span>今日流量<b>8.4 GB</b></span><span>运行时间<b>16.4 h</b></span></div></div>
+      <div class="device-card"><div class="device-title"><b>📱 我的手机</b><i>● 在线</i></div><small>Android · Wi-Fi</small><div class="mini-grid"><span>电量<b>52%</b></span><span>今日流量<b>1.8 GB</b></span><span>存储<b>68%</b></span><span>网络<b>良好</b></span></div></div>
+      <div class="device-card"><div class="device-title"><b>💾 家庭 NAS</b><i>● 在线</i></div><small>家庭存储服务器</small><div class="mini-grid"><span>存储<b>2.4 / 3.9 TB</b></span><span>使用率<b>62%</b></span><span>健康<b>正常</b></span><span>增长<b>+42 GB/周</b></span></div></div>
+      <div class="device-card"><div class="device-title"><b>📡 路由器</b><i>● 在线</i></div><small>家庭网络核心设备</small><div class="mini-grid"><span>设备<b>8 台</b></span><span>延迟<b>8 ms</b></span><span>下行<b>186 Mbps</b></span><span>上行<b>42 Mbps</b></span></div></div>
+      <div class="device-card muted-card"><b>🏠 其他 IoT 设备</b><p>电视 · 摄像头 · 智能插座 · 其他设备</p><small>4 台 · 演示占位</small></div>
+    </section>
+
+    <section id="analysis" class="page">
+      <h1>分析</h1><p class="sub">家庭数据趋势与预测</p>
+      <div class="period"><button class="selected">24 小时</button><button>7 天</button><button>30 天</button></div>
+      <div class="chart"><div class="chart-head"><b>CPU 使用率</b><span>平均 37%</span></div><div class="columns"><i style="height:35%"></i><i style="height:42%"></i><i style="height:31%"></i><i style="height:28%"></i><i style="height:55%"></i><i style="height:47%"></i><i style="height:38%"></i><i style="height:32%"></i><i style="height:44%"></i><i style="height:36%"></i><i style="height:29%"></i><i style="height:41%"></i></div></div>
+      <div class="chart"><div class="chart-head"><b>网络流量</b><span>今日 18.6 GB</span></div><div class="network-line">▁▂▃▂▄▆▅▃▂▄▃▂▅▃</div></div>
+      <div class="grid stats"><article><small>平均 CPU</small><b>37%</b><span>正常</span></article><article><small>平均 RAM</small><b>45%</b><span>稳定</span></article><article><small>今日流量</small><b>18.6 GB</b><span>↓ 8%</span></article><article><small>在线时长</small><b>16.4 h</b><span>较昨日 +1.2 h</span></article></div>
+      <h2>存储预测</h2><div class="forecast"><div><small>当前使用</small><b>62%</b></div><div class="forecast-bar"><i style="width:62%"></i></div><p>预计 <strong>94 天</strong> 后达到 80% 使用率；约 <strong>8.6 个月</strong>后需要扩容。</p></div>
+      <h2>异常检测</h2><div class="warning">🟢 <b>暂无高优先级异常</b><span>最近检查：刚刚</span></div>
+    </section>
+
+    <section id="settings" class="page"><h1>设置</h1><p class="sub">家庭数据中心配置</p><div class="settings"><div>👤 账户与家庭 <span>›</span></div><div>📱 数据源与设备 <span>›</span></div><div>🔄 同步设置 <span>自动</span></div><div>🔔 通知 <span>已开启</span></div><div>🤖 智能分析 <span>已开启</span></div><div>🔒 隐私与安全 <span>本地优先 ›</span></div><div>🗄️ 数据保存 <span>90 天</span></div><div>ℹ️ 关于 <span>V0.3</span></div></div><div class="privacy-note">🔐 真实家庭数据不会放入这个公开预览站。以后电脑采集的数据将保存在你的私有家庭数据中心。</div></section>
   </main>
   <nav><button data-page="home" class="active">⌂<span>首页</span></button><button data-page="devices">▣<span>设备</span></button><button data-page="analysis">◒<span>分析</span></button><button data-page="settings">⚙<span>设置</span></button></nav>
   <script src="app.js"></script>
