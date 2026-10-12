@@ -17,12 +17,14 @@ document.querySelector('#notify').onclick=()=>alert('当前没有新的高优先
 // 外观：日间 / 夜间 / 跟随系统
 const themeKey='fdc-theme';
 function systemTheme(){return window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
+function updateThemeToggle(){const b=document.querySelector('#theme-toggle');if(!b)return;const mode=localStorage.getItem(themeKey)||'system';const actual=mode==='system'?systemTheme():mode;b.textContent=actual==='light'?'🌙':'☀️';b.setAttribute('aria-label',actual==='light'?'切换夜间模式':'切换日间模式');b.title=actual==='light'?'切换夜间模式':'切换日间模式'}
 function applyTheme(mode){
  const actual=mode==='system'?systemTheme():mode;
  document.body.classList.toggle('light-theme',actual==='light');
  document.documentElement.dataset.theme=mode;
  localStorage.setItem(themeKey,mode);
  document.querySelectorAll('[data-theme-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.themeMode===mode));
+ updateThemeToggle();
 }
 function setupTheme(){
  const settings=document.querySelector('.settings');
@@ -40,3 +42,5 @@ function setupTheme(){
  if(window.matchMedia){window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if((localStorage.getItem(themeKey)||'system')==='system')applyTheme('system')})}
 }
 setupTheme();
+const themeToggle=document.querySelector('#theme-toggle');
+if(themeToggle)themeToggle.addEventListener('click',()=>{const mode=localStorage.getItem(themeKey)||'system';const actual=mode==='system'?systemTheme():mode;applyTheme(actual==='light'?'dark':'light');});
